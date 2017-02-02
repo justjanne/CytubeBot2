@@ -1,0 +1,63 @@
+group 'de.kuschku'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    dependencies {
+        classpath "io.spring.gradle:dependency-management-plugin:0.5.3.RELEASE"
+    }
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+}
+
+apply plugin: "io.spring.dependency-management"
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven {
+        url "http://repository.ops4j.org/maven2/"
+    }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.data:spring-data-releasetrain:Hopper-SR7'
+    }
+}
+
+dependencies {
+    // Static Analysis
+    compile group: 'org.jetbrains', name: 'annotations', version: '7757'
+
+    // Spring
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '1.5.0.RELEASE'
+    compile group: 'org.springframework.data', name: 'spring-data-jpa', version: '1.11.0.RELEASE'
+    compile group: 'org.springframework.data', name: 'spring-data-commons', version: '1.13.0.RELEASE'
+
+    // Persistence
+    compile group: 'org.hibernate.javax.persistence', name: 'hibernate-jpa-2.1-api', version: '1.0.0.Final'
+
+    // REST API interface
+    compile group: 'com.squareup.retrofit2', name: 'retrofit', version: '2.1.0'
+    compile group: 'com.squareup.retrofit2', name: 'converter-jackson', version: '2.1.0'
+
+    // Guava
+    compile group: 'com.google.guava', name: 'guava', version: '21.0'
+
+    // Socket IO
+    compile group: 'com.github.nkzawa', name: 'socket.io-client', version: '0.1.3'
+
+    // Databases
+    compile group: 'org.postgresql', name: 'postgresql', version: '9.4.1212'
+    compile group: 'com.h2database', name: 'h2', version: '1.4.193'
+
+    // Testing
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '1.5.0.RELEASE'
+    testCompile group: 'org.springframework', name: 'spring-test', version: '4.3.6.RELEASE'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
