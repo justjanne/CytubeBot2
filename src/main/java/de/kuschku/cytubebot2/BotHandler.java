@@ -11,9 +11,11 @@ import de.kuschku.cytubebot2.messages.out.SendChatMsg;
 import de.kuschku.cytubebot2.messages.out.SendInitChannelCallbacks;
 import de.kuschku.cytubebot2.messages.out.SendJoinChannel;
 import de.kuschku.cytubebot2.messages.out.SendLogin;
+import de.kuschku.cytubebot2.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.activation.DataSource;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
@@ -25,7 +27,10 @@ import static de.kuschku.cytubebot2.utils.PrintUtils.printMultiline;
 @Component
 public class BotHandler {
     @Autowired
-    EventBus eventBus;
+    private EventBus eventBus;
+
+    @Autowired
+    private Database database;
 
     @PostConstruct
     public void register() {
